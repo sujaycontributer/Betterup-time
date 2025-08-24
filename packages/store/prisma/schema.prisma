@@ -1,0 +1,39 @@
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Website {
+  id              String @id @default(uuid())
+  url             String
+  cretedAt        DateTime @default(now())
+  ticks           WebsiteTick[]
+} 
+
+model Region {
+  id      String @id
+  name    String
+  ticks   WebsiteTick[]
+}
+
+model WebsiteTick {
+  id                String         @id
+  response_time     Int
+  status            WebsiteStatus
+  region            Region         @relation(fields: [region_id], references: [id])
+  website           Website        @relation(fields: [website_id], references: [id])  
+  website_id        String 
+  region_id         String
+} 
+
+enum WebsiteStatus {
+  Up
+  Down
+  Unknown
+}
