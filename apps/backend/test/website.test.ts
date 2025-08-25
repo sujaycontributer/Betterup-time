@@ -40,4 +40,41 @@ describe("Website test", async () => {
 
         }
     })
-})
+
+    it("Can website fetch", async () => {
+        let token1, token2, userId1:string, userId2;
+        beforeAll(async () => {
+            const user1 = await createUser();
+            const user2 = await createUser();
+            userId1 = user1.id;
+            token1 = user1.jwt;
+            userId2 = user2.id;
+            token2 = user2.jwt;
+        });
+
+        it("Is able to fetch the website if website is created", async () => {
+            try {
+                const res = await axios.post(`${BASE_URL}/api/v1/website`, {
+                    url: "https://google.com"
+                }, {        
+                    headers: {
+                        Authorization: token1!
+                    }
+                }); 
+
+                const websiteId = res.data.id;
+                
+                const fetchWebsite = await axios.get(`${BASE_URL}/api/v1/website/${websiteId}`, {
+                    headers: {
+                        Authorization: token1!
+                    }
+                });
+                expect(res.data.id).toBe(fetchWebsite.data.id);
+                expect(fetchWebsite.data.user_id).toBe(userId1);
+
+            } catch (e) {
+
+            }
+        });
+    });
+});
