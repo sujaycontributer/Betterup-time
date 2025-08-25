@@ -1,13 +1,13 @@
 import axios from "axios";
 import {describe, it, expect} from "bun:test";
-import { BACKEND_URL } from "./config";
+import { BASE_URL } from "./config";
 
 const randomUsername = Math.random().toString();
 
 describe("Signup endpoints test", async () => {
     it("Isnt signup if body is incorrect", async () => {
        try {
-         await axios.post(`${BACKEND_URL}/api/v1/user/signup`, {
+         await axios.post(`${BASE_URL}/api/v1/user/signup`, {
             email: "dasda",
             password: "ddkfrennkci"
         });
@@ -19,7 +19,7 @@ describe("Signup endpoints test", async () => {
 
     it("Is able to signup if body is correct", async () => {
        
-        const res = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, {
+        const res = await axios.post(`${BASE_URL}/api/v1/user/signup`, {
             username: randomUsername,
             password: "ddkfrennkci"
         });
@@ -32,19 +32,19 @@ describe("Signup endpoints test", async () => {
 describe("Signin endpoints test", async () => {
     it("Isnt signin if body is incorrect", async () => {
        try {
-         await axios.post(`${BACKEND_URL}/api/v1/user/signin`, {
+         await axios.post(`${BASE_URL}/api/v1/user/signin`, {
             email: "dasda",
             password: "ddkfrennkci"
         });
         expect(false, "Control should not reach here");
        } catch (e) {
-        console.log(e);
+        // console.log(e);
        }
     })
 
     it("Is able to signin if body is correct", async () => {
        
-        const res = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, {
+        const res = await axios.post(`${BASE_URL}/api/v1/user/signin`, {
             username: randomUsername,
             password: "ddkfrennkci"
         });
