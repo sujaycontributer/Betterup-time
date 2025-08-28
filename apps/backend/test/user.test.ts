@@ -38,7 +38,8 @@ describe("Signin endpoints test", async () => {
         });
         expect(false, "Control should not reach here");
        } catch (e) {
-        // console.log(e);
+        // console.log(e); if here control comes measns succed
+        
        }
     })
 

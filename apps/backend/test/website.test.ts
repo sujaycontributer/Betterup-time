@@ -53,7 +53,6 @@ describe("Website test", async () => {
         });
 
         it("Is able to fetch the website if website is created", async () => {
-            try {
                 const res = await axios.post(`${BASE_URL}/api/v1/website`, {
                     url: "https://google.com"
                 }, {        
@@ -64,7 +63,7 @@ describe("Website test", async () => {
 
                 const websiteId = res.data.id;
                 
-                const fetchWebsite = await axios.get(`${BASE_URL}/api/v1/website/${websiteId}`, {
+                const fetchWebsite = await axios.get(`${BASE_URL}/api/v1/statua/${websiteId}`, {
                     headers: {
                         Authorization: token1!
                     }
@@ -72,9 +71,7 @@ describe("Website test", async () => {
                 expect(res.data.id).toBe(fetchWebsite.data.id);
                 expect(fetchWebsite.data.user_id).toBe(userId1);
 
-            } catch (e) {
-
-            }
+            
         });
     });
 });
