@@ -18,17 +18,19 @@ async function main() {
 
         axios.get(url)
             .then( async () => {
+              // means website is up 
               await prismaClient.websiteTick.create({
                 data: {
                     response_time: Date.now() - startTime,
-                    status: "Down",
+                    status: "Up",
                     timeAdded: Date.now().toString(),
-                    
+                    region_id: REGION_ID,
+                    website_id: websiteId
                 }
-              })
+              });
             })
             .catch((err) => {
-                
+                // means website is down
             })
 
     });
