@@ -21,6 +21,7 @@ export async function xAddBulk(websites: websiteType[]) {
     for(let i = 0; i < websites.length; i++ ) {
         await xAdd({url: websites[i]?.url!, id: websites[i]?.id!})
     }
+    console.log("Pushed in to redis");
 }
 
 export async function xReadGroup(consumerGroup: string, workerId: string): Promise<any> {
@@ -30,7 +31,7 @@ export async function xReadGroup(consumerGroup: string, workerId: string): Promi
     }, {
         COUNT: 5
     });
-
+    console.log(res);
     return res;
 } 
 

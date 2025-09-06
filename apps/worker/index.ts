@@ -1,5 +1,4 @@
 import axios from "axios";
-import { resolve } from "bun";
 import { xAckBulk, xReadGroup } from "redis_stream/client"
 import {prismaClient} from "store/client"
 
@@ -11,13 +10,15 @@ if(!REGION_ID || !WORKER_ID) throw new Error("REGION_ID OR WORKER_ID is not ther
 async function main() {
     const res: any = await xReadGroup(REGION_ID, WORKER_ID);
     // console.log(res[0].messages);
-    const promises = res.map(({messages}:any) => checkStatus(messages.url, messages.id)); // promises have array of promises
-    await Promise.all(promises);
-    console.log(promises.length);
-    const streamIds = res.map( ({id}:any) => id );
+    const promises = res?.map(({messages}:any) => checkStatus(messages.url, messages.id)); // promises have array of promises
+    if(promises) {
+      await Promise.all(promises);
+      console.log(promises.length);
+    } 
+    const streamIds = res?.map( ({id}:any) => id );
 
     // acknoledgement *********** very imporant part ************
-    xAckBulk(REGION_ID, streamIds );
+    if(streamIds) xAckBulk(REGION_ID, streamIds );
 }
 
 async function checkStatus(url: string, websiteId: string) {
