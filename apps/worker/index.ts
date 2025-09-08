@@ -8,7 +8,7 @@ const WORKER_ID = process.env.WORKER_ID!;
 if (!REGION_ID || !WORKER_ID) throw new Error("REGION_ID OR WORKER_ID is not there");
 
 async function main() {
-  const res: any = await xReadGroup(REGION_ID, WORKER_ID);
+  const res: any = await xReadGroup(REGION_ID, WORKER_ID); // in stream shoud have websiteId
   const promises = res?.map(({ messages }: any) => checkStatus(messages.url, messages.id)); // promises have array of promises
   if (promises) {
     await Promise.all(promises);
