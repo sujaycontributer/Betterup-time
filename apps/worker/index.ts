@@ -8,8 +8,8 @@ const WORKER_ID = process.env.WORKER_ID!;
 if (!REGION_ID || !WORKER_ID) throw new Error("REGION_ID OR WORKER_ID is not there");
 
 async function main() {
-  const res: any = await xReadGroup(REGION_ID, WORKER_ID); // in stream shoud have websiteId
-  const promises = res?.map(({ messages }: any) => checkStatus(messages.url, messages.id)); // promises have array of promises
+  const res: any = await xReadGroup(REGION_ID, WORKER_ID); // in stream shoud have websiteId 
+  const promises = res?.map(({ messages }: any) => messages.map((obj:any) => checkStatus(obj.message.url, obj.message.id) ) ); // promises have array of promises
   if (promises) {
     await Promise.all(promises);
     console.log(promises.length);
@@ -32,7 +32,7 @@ async function checkStatus(url: string, websiteId: string) {
             response_time: Date.now() - startTime,
             status: "Up",
             timeAdded: Date.now().toString(),
-            region_id: REGION_ID,
+            region_id: "e9ad0039-df9c-4880-8ca9-92ac429c2782",
             website_id: websiteId
           }
         });
