@@ -26,7 +26,7 @@ model Website {
 } 
 
 model Region {
-  id      String @id
+  id      String @id @default(uuid())
   name    String
   ticks   WebsiteTick[] 
 }

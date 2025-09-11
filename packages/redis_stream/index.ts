@@ -31,7 +31,7 @@ export async function xReadGroup(consumerGroup: string, workerId: string): Promi
     }, {
         COUNT: 5
     });
-    console.log(res);
+    // console.log(JSON.stringify(res));
     return res;
 } 
 
