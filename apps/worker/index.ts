@@ -3,7 +3,7 @@ import { xAckBulk, xReadGroup } from "redis_stream/client"
 import { prismaClient } from "store/client"
 
 const REGION_ID = process.env.REGION_ID!;
-const WORKER_ID = process.env.WORKER_ID!;
+const WORKER_ID = "worker-1";
 
 if (!REGION_ID || !WORKER_ID) throw new Error("REGION_ID OR WORKER_ID is not there");
 
