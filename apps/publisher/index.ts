@@ -8,7 +8,6 @@ async function main () {
             id: true
         }
     });
-
     await xAddBulk(websites);
 }
 

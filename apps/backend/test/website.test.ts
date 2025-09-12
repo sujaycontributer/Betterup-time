@@ -29,7 +29,7 @@ describe("Website test", async () => {
     it("Wesbite should  be create if url is exist", async () => {
         try {
             const res = axios.post(`${BASE_URL}/api/v1/website`, {
-                url: "https://sdjbkjwk.com"
+                url: "https://google.com"
             }, {        
                 headers: {
                     Authorization: token!
