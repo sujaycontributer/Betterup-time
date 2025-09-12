@@ -5,7 +5,7 @@ const client = await createClient()
   .connect();
 
 type websiteType = {id: string, url: string};
-const STREAM_NAME = 'betteruptime:website'
+const STREAM_NAME = 'betteruptime:website';
 
 async function xAdd({url, id}: websiteType) {
     const res = await client.xAdd(
