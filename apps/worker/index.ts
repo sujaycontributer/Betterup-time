@@ -13,11 +13,9 @@ async function main() {
   const promises = res?.map(({ messages }: any) => messages.map((obj:any) => checkStatus(obj.message.url, obj.message.id) ) ); // promises have array of promises
   if (promises) {
     await Promise.all(promises);
-    // console.log(res);
     console.log(promises.length);
   }
   const streamObj = res[0]?.messages;
-  // console.log(streamObj);
   const streamIds = streamObj?.map((stremaRes: any) => stremaRes.id);
   console.log(streamIds)
 
