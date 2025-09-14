@@ -59,3 +59,6 @@ async function checkStatus(url: string, websiteId: string) {
 
 main();
 
+while(true) { // Infinitely consumer will read
+  main();
+}
