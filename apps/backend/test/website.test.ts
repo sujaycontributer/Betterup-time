@@ -70,8 +70,43 @@ describe("Website test", async () => {
                 });
                 expect(res.data.id).toBe(fetchWebsite.data.id);
                 expect(fetchWebsite.data.user_id).toBe(userId1);
-
-            
         });
     });
+});
+
+describe("Should be able to get all websites by user", async () => {
+    it("Can fetch its own set of websites", async () => {
+        let token1, userId1:string;
+        beforeAll(async () => {
+            const user1 = await createUser();
+            userId1 = user1.id;
+            token1 = user1.jwt;
+        });
+
+        it("Is able to fetch the website if website is created", async () => {
+                const res = await axios.post(`${BASE_URL}/api/v1/website`, {
+                    url: "https://google.com"
+                }, {        
+                    headers: {
+                        Authorization: token1!
+                    }
+                }); 
+
+                const res2 = await axios.post(`${BASE_URL}/api/v1/website`, {
+                    url: "https://facebook.com"
+                }, {        
+                    headers: {
+                        Authorization: token1!
+                    }
+                });
+                
+                const fetchWebsite = await axios.get(`${BASE_URL}/api/v1/user/website`, {
+                    headers: {
+                        Authorization: token1!
+                    }
+                });
+                expect(res.data.website.length).toBe(2);
+        });
+    });
+        
 });
