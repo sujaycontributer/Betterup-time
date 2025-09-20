@@ -90,6 +90,17 @@ websiteRouter.post('/website', authMiddleware, async (req, res) => {
     }
 });
 
+websiteRouter.get('/user/website', authMiddleware, async (req, res) => {
+    const websites = await prismaClient.website.findMany({
+        where:{
+            user_id: req.userId
+        }
+    });
+    res.status(200).json({
+        websites
+    });
+})
+
 websiteRouter.get('/status/:websiteId', authMiddleware, async (req, res) => {
     const websiteId = req.params.websiteId;
     try {
@@ -103,7 +114,7 @@ websiteRouter.get('/status/:websiteId', authMiddleware, async (req, res) => {
                     orderBy: {
                         timeAdded: 'desc'
                     },
-                    take: 1,
+                    take: 10,
                 }
             }
         });
