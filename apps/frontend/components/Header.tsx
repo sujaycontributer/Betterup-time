@@ -16,7 +16,7 @@ const Header = () => {
             <span className="text-xl font-bold text-white">UpWatch</span>
           </div>
           
-          {/* Desktop Navigation */}
+           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
             <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
