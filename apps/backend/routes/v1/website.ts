@@ -12,7 +12,7 @@ websiteRouter.post('/user/signup', async (req, res) => {
         res.status(403).json({
             message: "Order not valid"
         });
-        return;
+        return; 
     }
 
     try {
